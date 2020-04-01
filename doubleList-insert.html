@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function doubleList() {
+            let head = null;
+            let tail = null;
+            this.length = 0
+            function item(data) {
+                this.data = data;
+                this.next = null;
+                this.prev = null;
+
+            }
+
+            doubleList.prototype.insert = function (position, data) {
+                let newNode = new item(data);
+                if (position < 0 || position > this.length) {
+                    return false;
+                }
+                if (this.length == 0) {
+                    this.head = newNode;
+                    newNode.next = null;
+                    this.tail = newNode;
+                    newNode.prev = null;
+                } else {
+                    if (position == 0) {
+                        newNode.next = this.head;
+                        newNode.prev = null;
+                        this.head = newNode;
+                    } else if (position == this.length) {
+                        newNode.prev = this.tail;
+                        this.tail.next = newNode;
+                        this.tail = newNode
+                    } else {
+                        let current = this.head;
+                        let index = 0;
+                        while (index++ < position) {
+                            current = current.next;
+                        }
+                        newNode.next = current;
+                        newNode.prev = current.prev;
+                        current.prev.next = newNode;
+                        current.prev = newNode;
+                    }
+                }
+                this.length += 1
+                return true;
+            }
+        }
+        let obj = new doubleList();
+        obj.insert(0, 'aaa')
+        obj.insert(1, 'bbb')
+        obj.insert(1, 'ccc')
+        console.log(obj);
+    </script>
+</body>
+
+</html>
