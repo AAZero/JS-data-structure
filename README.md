@@ -1,2 +1,2 @@
-# JS-Algorithm-and-data-structure
+# JS-data-structure
 手写实现
