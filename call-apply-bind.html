@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        Function.prototype.myCall = function (context) {
+            var context = context || window;
+            context.fn = this;
+            var args = [...arguments].slice[1];
+            var result = context.fn(...args);
+            delete context.fn;
+            return result;
+        }
+        Function.prototype.myApply = function (context) {
+            var context = context || window;
+            context.fn = this;
+            var result;
+            if (arguments[1]) {
+                result = context.fn(...arguments[1]);
+            } else {
+                result = context.fn();
+            }
+            delete context.fn;
+            return result;
+        }
+        Function.prototype.myBind = function (context) {
+            if (typeof this !== 'Function') {
+                throw new Error('error');
+            }
+            var _this = this;
+            var args = [...arguments].slice(1);
+            return function F() {
+                if (this instanceof F) {
+                    return new _this(...args, ...arguments);
+                }
+                return _this.apply(context, args.concat(...arguments));
+            }
+        }
+
+
+        Function.prototype.myCall = function (content) {
+            var context = context || window;
+            context.fn = this;
+            var args = [...arguments].slice(1);
+            var result = context.fn(...args);
+            delete context.fn;
+            return result;
+        }
+        Function.prototype.myApply = function (context) {
+            var context = context || window;
+            context.fn = this;
+            var result;
+            if (arguments[1]) {
+                result = context.fn(...arguments[1]);
+             } else {
+                result = context.fn();
+            }
+            delete context.fn;
+            return result;
+        }
+        Function.prototype.myBind = function(context) {
+            if (typeof this !== 'Fnction') {
+                throw new Error('error');
+            }
+            var _this = this;
+            var args = [...arguments].slice(1);
+            return function F(){
+                if (this instanceof F) {
+                    return new _this(...args, ...arguments);
+                }
+                return _this.apply(context, args.concat(...arguments));
+            }
+        }
+        Function.prototype.myBind = function(context){
+            if (typeof this !== 'Function') {
+                throw new Error('error');
+            }
+            var _this = this;
+            var args = [...arguments].slice(1);
+            return function F() {
+                if (this instanceof F) {
+                    return new _this(...args, ...arguments);
+                }
+                return this.apply(context, args.concat([...arguments]));
+            }
+        }
+    </script>
+</body>
+
+</html>
