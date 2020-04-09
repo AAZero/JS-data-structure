@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            height: 10000px;
+        }
+    </style>
+</head>
+
+<body>
+    <input id='myinput' type="text" onkeyup="testFunction()">
+    <script>
+        //防抖
+        let input = document.getElementById('myinput');
+        //input.addEventListener('keyup', testFunction);
+        let goFunc = debounce(col,500);
+        function testFunction () {
+            goFunc('1');
+           //console.log('111111');
+        }
+        function col(data) {
+            console.log(data);
+        }
+        function debounce(func, wait) {
+            let timer = null;
+            return function () {
+                let args=[...arguments]
+                if (timer) {
+                    clearTimeout(timer);
+                }
+                timer = setTimeout(function(){
+                    func.apply(this, args);
+                }, wait);
+            }
+        }
+        
+        //节流
+        let newFunc = throttle(col, 3000);
+        window.addEventListener('scroll', function(){
+            //console.log('1111');
+            newFunc('333');
+        })
+        function throttle(func, wait) {
+            let lastTime = 0;
+            return function () {
+                let args = [...arguments]
+                let nowTime = new Date();
+                if (nowTime - lastTime > wait) {
+                    lastTime  = nowTime;
+                    func.apply(this,args);
+                }
+            }
+        }
+        
+
+    </script>
+</body>
+
+</html>
