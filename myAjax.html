@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // function myAjax(url, method, data, callback, flag) {
+        //     let xhr = null;
+        //     if (window.XMLHttpRequest) {
+        //         xhr = new XMLHttpRequest();
+        //     } else {
+        //         //兼容IE
+        //         xhr = new ActiveXObject('Microsoft.XMLHttp');
+        //     }
+        //     method = method.toUpperCase();
+        //     if (method == 'GET') {
+        //         xhr.open('GET', url + '?' + data, flag);
+        //         xhr.send();
+        //     } else {
+        //         xhr.open('POST', url, flag);
+        //         xhr.setRequstHeader('Content-type', 'application/x-www-form-urlencoded');
+        //         xhr.send(data);
+        //     }
+        //     xhr.onreadystatechange = function () {
+        //         if (xhr.readyState == 4 && xhr.status == 200) {
+        //             res = xhr.responseText;
+        //             callback(res);
+        //         }
+        //     }
+        // }
+
+
+        function myAjax(method, url, data, callback, flag) {
+            let xhr = null;
+            if (window.XMLHttpRequest) {
+                xhr = new XMLHttpRequest();
+            } else {
+                xhr = new ActiveXObject('Microsoft.XMLHttp');
+            }
+            method = method.toUpperCase();
+            if (method == 'GET') {
+                xhr.open('GET', url + '?' + data, flag);
+                xhr.send();
+            } else {
+                xhr.open('POST', url, flag);
+                xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xhr.send(data);
+            }
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    res = xhr.responseText;
+                    callback(res);
+                }
+            }
+        }
+        myAjax('get', 'www.baidu.com', '', function(res){
+            console.log(res);
+        }, true);
+    </script>
+</body>
+
+</html>
