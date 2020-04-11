@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //對象字面量的方式
+        person={firstname:"Mark",lastname:"Yun",age:25,eyecolor:"black"};
+
+        //构造函数
+        function Person1 (name, age, hobby) {
+            this.name = name;
+            this.age = age;
+            this.eat = function () {
+                console.log('name:'+this.name,'age:'+this.age); 
+            }
+        }
+        let obj1 = new Person1('xiaohong', '20');
+
+        //工厂模式
+        let obj2 = new Object();
+        obj2.name = 'xiaohong';
+        obj2.age = '20';
+        obj2.eat = function () {
+            console.log(this.name,this.age)
+        }
+
+        //原型
+        function Person3(){}
+        Person3.prototype.name = 'xiaohong';
+        Person3.prototype.eat = '20';
+        Person3.prototype.eat = function() {
+            console.log(this.name,this.age);
+        }
+        let obj3 = new Person3();
+
+        //混合模式（构造函数+原型）
+        function Person4(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+        Person4.prototype.eat = function() {
+            console.log(this.name, this.age);
+        }
+        let obj4 = new Person4('xiaohong', '20');
+    </script>
+</body>
+</html>
